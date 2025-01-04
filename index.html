@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stack Game</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <canvas class="stack-game__webgl"></canvas>
+
+    <main class="stack-game__container" id="mainContainer">
+      <p class="stack-game__score">0</p>
+
+      <article class="stack-game__menu">
+        <div class="stack-game__menu-wrapper">
+          <h2 class="stack-game__title">Stack Game</h2>
+          <h3 class="stack-game__last-score">Last Score: 0</h3>
+          <button
+            id="playbtn"
+            class="stack-game__button"
+            aria-label="play button"
+          >
+            ¡Play!
+          </button>
+        </div>
+      </article>
+    </main>
+
+    <script type="module" src="./src/index.ts"></script>
+  </body>
+</html>
