@@ -5,9 +5,9 @@ import { Block, Coords, Direction, Sizes } from "../entities/entities";
 
 import { StackGame } from "./StackGame";
 
-import { getElements } from "../helpers/getElements";
+import { OFFICIAL_BODY } from "../tests/jest.constants";
 
-import { OFFICIAL_BODY } from "../tests/jest.setup";
+import { getElements } from "../helpers/getElements";
 
 beforeEach(() => {
   document.body.innerHTML = OFFICIAL_BODY;
