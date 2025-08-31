@@ -22,9 +22,6 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 #### Dependencies
 
 ```
-"@types/jest": "^29.5.14"
-"@types/cannon": "^0.1.12"
-"@types/three": "^0.161.2"
 "cannon": "^0.6.2"
 "three": "^0.148.0"
 ```
@@ -35,11 +32,15 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 "@testing-library/dom": "^10.4.0"
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/user-event": "^14.5.2"
+"@types/jest": "^29.5.14"
+"@types/cannon": "^0.1.12"
+"@types/three": "^0.161.2"
+"@types/node": "^20.10.6"
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
 "ts-jest": "^29.2.5"
 "typescript": "^5.3.3"
-"vite": "^4.0.4"
+"vite": "^5.0.8"
 ```
 
 ## Portfolio Link

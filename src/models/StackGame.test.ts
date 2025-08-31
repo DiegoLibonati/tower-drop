@@ -5,7 +5,7 @@ import { Block, Coords, Direction, Sizes } from "../entities/entities";
 
 import { StackGame } from "./StackGame";
 
-import { OFFICIAL_BODY } from "../tests/jest.constants";
+import { OFFICIAL_BODY } from "../../tests/jest.constants";
 
 import { getElements } from "../helpers/getElements";
 
