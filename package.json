@@ -11,19 +11,19 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.14",
     "@types/cannon": "^0.1.12",
-    "@types/three": "^0.161.2",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20.10.6",
+    "@types/three": "^0.161.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^7.1.5"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -p tsconfig.app.json && vite build",
     "preview": "vite preview",
     "test": "jest --watchAll --verbose"
   }

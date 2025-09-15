@@ -1,13 +1,13 @@
 import * as THREE from "three";
 import * as CANNON from "cannon";
 
-import { Block, Coords, Direction, Sizes } from "../entities/entities";
+import { Block, Coords, Direction, Sizes } from "@src/entities/entities";
 
-import { StackGame } from "./StackGame";
+import { StackGame } from "@src/models/StackGame";
 
-import { OFFICIAL_BODY } from "../../tests/jest.constants";
+import { OFFICIAL_BODY } from "@tests/jest.constants";
 
-import { getElements } from "../helpers/getElements";
+import { getElements } from "@src/helpers/getElements";
 
 beforeEach(() => {
   document.body.innerHTML = OFFICIAL_BODY;

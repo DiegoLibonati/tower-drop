@@ -1,5 +1,5 @@
-import { StackGame } from "./models/StackGame";
-import { getElements } from "./helpers/getElements";
+import { StackGame } from "@src/models/StackGame";
+import { getElements } from "@src/helpers/getElements";
 
 const onInit = () => {
   const { canvas } = getElements();

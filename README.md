@@ -1,5 +1,11 @@
 # Stack Game 3D
 
+## Educational Purpose
+
+This project was created primarily for **educational and learning purposes**.  
+While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
+The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
+
 ## Getting Started
 
 1. Clone the repository
@@ -32,15 +38,15 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 "@testing-library/dom": "^10.4.0"
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/user-event": "^14.5.2"
-"@types/jest": "^29.5.14"
 "@types/cannon": "^0.1.12"
-"@types/three": "^0.161.2"
+"@types/jest": "^29.5.14"
 "@types/node": "^20.10.6"
+"@types/three": "^0.161.2"
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
 "ts-jest": "^29.2.5"
 "typescript": "^5.3.3"
-"vite": "^5.0.8"
+"vite": "^7.1.5"
 ```
 
 ## Portfolio Link
@@ -59,3 +65,5 @@ https://github.com/DiegoLibonati/Stack-Game-3D-Page/assets/99032604/67e0b504-95d
 
 1. Join to the correct path of the clone
 2. Execute: `yarn test` or `npm test`
+
+## Known Issues

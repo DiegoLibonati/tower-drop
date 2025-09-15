@@ -8,9 +8,9 @@ import {
   CreateBlockArgs,
   GameState,
   Sizes,
-} from "../entities/entities";
+} from "@src/entities/entities";
 
-import { getElements } from "../helpers/getElements";
+import { getElements } from "@src/helpers/getElements";
 
 export class StackGame {
   private scene: THREE.Scene;
