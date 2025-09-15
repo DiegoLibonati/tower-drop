@@ -45,6 +45,7 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
 "ts-jest": "^29.2.5"
+"ts-node": "^10.9.2"
 "typescript": "^5.3.3"
 "vite": "^7.1.5"
 ```
