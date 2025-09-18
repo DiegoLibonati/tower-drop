@@ -11,7 +11,7 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 1. Clone the repository
 2. Join to the correct path of the clone
 3. Execute: `yarn install` or `npm install`
-4. Execute: `yarn dev` or `npm dev`
+4. Execute: `yarn run dev` or `npm run dev`
 
 ## Description
 
