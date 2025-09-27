@@ -21,7 +21,7 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 
 1. Typescript
 2. CSS3
-3. NodeJS
+3. HTML5
 4. Vite
 
 ## Libraries used
