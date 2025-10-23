@@ -52,21 +52,25 @@ describe("StackGamePage.ts", () => {
 
     test("It should render the main container with correct id", () => {
       renderComponent();
-      const mainContainer = document.getElementById("mainContainer");
+      const mainContainer =
+        document.querySelector<HTMLDivElement>("#mainContainer");
       expect(mainContainer).toBeInTheDocument();
       expect(mainContainer?.className).toBe("stack-game__container");
     });
 
     test("It should render the score element with initial value 0", () => {
       renderComponent();
-      const score = document.querySelector(".stack-game__score");
+      const score =
+        document.querySelector<HTMLHeadingElement>(".stack-game__score");
       expect(score).toBeInTheDocument();
       expect(score?.textContent).toBe("0");
     });
 
     test("It should render the menu wrapper", () => {
       renderComponent();
-      const menuWrapper = document.querySelector(".stack-game__menu-wrapper");
+      const menuWrapper = document.querySelector<HTMLDivElement>(
+        ".stack-game__menu-wrapper"
+      );
       expect(menuWrapper).toBeInTheDocument();
     });
 
@@ -105,8 +109,10 @@ describe("StackGamePage.ts", () => {
 
     test("It should append the play button to menu wrapper", () => {
       renderComponent();
-      const menuWrapper = document.querySelector(".stack-game__menu-wrapper");
-      const playButton = document.getElementById("playbtn");
+      const menuWrapper = document.querySelector<HTMLDivElement>(
+        ".stack-game__menu-wrapper"
+      );
+      const playButton = document.querySelector<HTMLButtonElement>("#playbtn");
 
       expect(playButton).toBeInTheDocument();
       expect(menuWrapper).toContainElement(playButton);
@@ -116,7 +122,8 @@ describe("StackGamePage.ts", () => {
   describe("StackGame Initialization Tests.", () => {
     test("It should initialize StackGame with canvas element", () => {
       const { container } = renderComponent();
-      const canvas = container.querySelector(".stack-game__webgl");
+      const canvas =
+        container.querySelector<HTMLCanvasElement>(".stack-game__webgl");
 
       expect(StackGame).toHaveBeenCalledTimes(1);
       expect(StackGame).toHaveBeenCalledWith(canvas);
