@@ -7,11 +7,13 @@ import { Button } from "@src/components/Button/Button";
 
 type RenderComponent = {
   container: HTMLButtonElement;
-  props: ButtonProps;
+  props: { onClick: jest.Mock } & ButtonProps;
 };
 
-const renderComponent = (custom?: Partial<ButtonProps>): RenderComponent => {
-  const props: ButtonProps = {
+const renderComponent = (
+  custom?: Partial<{ onClick: jest.Mock } & ButtonProps>
+): RenderComponent => {
+  const props = {
     id: "test-button",
     ariaLabel: "test button",
     children: "<span>Click Me</span>",

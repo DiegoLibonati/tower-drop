@@ -13,7 +13,7 @@ type RenderComponent = {
 const renderComponent = (): RenderComponent => {
   const container = StackGamePage();
   document.body.appendChild(container);
-  return { container };
+  return { container: container };
 };
 
 jest.mock("@src/core/StackGame");
@@ -49,7 +49,7 @@ describe("StackGamePage.ts", () => {
       expect(canvas).toBeInstanceOf(HTMLCanvasElement);
       expect(canvas?.className).toBe("stack-game__webgl");
     });
-    
+
     test("It should render the main container with correct id", () => {
       renderComponent();
       const mainContainer = document.getElementById("mainContainer");
