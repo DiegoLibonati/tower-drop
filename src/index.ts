@@ -1,10 +1,9 @@
-import { StackGame } from "@src/models/StackGame";
-import { getElements } from "@src/helpers/getElements";
+import { StackGamePage } from "@src/pages/StackGamePage/StackGamePage";
 
 const onInit = () => {
-  const { canvas } = getElements();
-
-  new StackGame(canvas);
+  const app = document.querySelector<HTMLDivElement>("#app")!;
+  const stackGamePage = StackGamePage();
+  app.appendChild(stackGamePage);
 };
 
 document.addEventListener("DOMContentLoaded", onInit);

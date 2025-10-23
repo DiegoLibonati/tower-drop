@@ -1,13 +1,11 @@
 import * as THREE from "three";
 import * as CANNON from "cannon";
 
-import { Block, Coords, Direction, Sizes } from "@src/entities/entities";
+import { Block, Coords, Direction, Sizes } from "@src/entities/app";
 
-import { StackGame } from "@src/models/StackGame";
+import { StackGame } from "@src/core/StackGame";
 
 import { OFFICIAL_BODY } from "@tests/jest.constants";
-
-import { getElements } from "@src/helpers/getElements";
 
 beforeEach(() => {
   document.body.innerHTML = OFFICIAL_BODY;
@@ -34,15 +32,9 @@ describe("StackGame", () => {
   let isMovingForward: boolean;
 
   beforeEach(() => {
-    const {
-      canvas: canvasElement,
-      score: scoreElement,
-      menu: menuElement,
-    } = getElements();
-
-    canvas = canvasElement;
-    score = scoreElement;
-    menu = menuElement;
+    canvas = document.querySelector<HTMLCanvasElement>(".stack-game__webgl")!;
+    score = document.querySelector<HTMLHeadingElement>(".stack-game__score")!;
+    menu = document.querySelector<HTMLDivElement>(".stack-game__menu")!;
 
     stackGame = new StackGame(canvas);
 

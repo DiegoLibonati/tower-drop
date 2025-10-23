@@ -1,0 +1,17 @@
+services:
+  stack-game-client:
+    build:
+      context: ./
+      dockerfile: Dockerfile.development
+    restart: always
+    volumes:
+      - .:/home/app
+      - /home/app/node_modules
+    ports:
+      - 5173:5173
+    networks:
+      - stack-game-net
+    tty: true
+
+networks:
+  stack-game-net:

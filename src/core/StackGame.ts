@@ -1,16 +1,13 @@
 import * as THREE from "three";
 import * as CANNON from "cannon";
 
+import { Block, Sizes } from "@src/entities/app";
 import {
   AddBlockArgs,
   AddFallBlockArgs,
-  Block,
   CreateBlockArgs,
-  GameState,
-  Sizes,
-} from "@src/entities/entities";
-
-import { getElements } from "@src/helpers/getElements";
+} from "@src/entities/args";
+import { GameState } from "@src/entities/states";
 
 export class StackGame {
   private scene: THREE.Scene;
@@ -88,12 +85,14 @@ export class StackGame {
   }
 
   private addEventListeners(): void {
-    const { btnPlay } = getElements();
+    const btnPlay = this.canvas
+      .closest(".stack-game-page")
+      ?.querySelector<HTMLButtonElement>(".stack-game__button");
 
     window.addEventListener("resize", this.onWindowResize.bind(this));
     window.addEventListener("click", this.onWindowClick.bind(this));
 
-    btnPlay.addEventListener("click", this.onGameStart.bind(this));
+    btnPlay?.addEventListener("click", this.onGameStart.bind(this));
   }
 
   private addBlock({ coords, sizes, direction }: AddBlockArgs): void {
@@ -186,14 +185,32 @@ export class StackGame {
   }
 
   private onWindowResize(): void {
+    this.sizes.width = window.innerWidth;
+    this.sizes.height = window.innerHeight;
+
+    const aspect = this.sizes.width / this.sizes.height;
+    const cameraWidth = 15;
+    const cameraHeight = cameraWidth / aspect;
+
+    this.camera.left = cameraWidth / -2;
+    this.camera.right = cameraWidth / 2;
+    this.camera.top = cameraHeight / 2;
+    this.camera.bottom = cameraHeight / -2;
     this.camera.updateProjectionMatrix();
 
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    this.renderer.render(this.scene, this.camera);
   }
 
   private onWindowClick(e: Event): void {
-    const { lastScore, score, menu } = getElements();
+    const score =
+      document.querySelector<HTMLHeadingElement>(".stack-game__score");
+    const menu = document.querySelector<HTMLDivElement>(".stack-game__menu");
+    const lastScore = document.querySelector<HTMLHeadingElement>(
+      ".stack-game__last-score"
+    );
     const { blocks, gameStarted } = this.gameState;
 
     const target = e.target as HTMLElement;
@@ -219,10 +236,10 @@ export class StackGame {
     if (overlap < 0) {
       this.renderer.setAnimationLoop(null);
 
-      lastScore.innerHTML = `Last Score: ${score.innerHTML}`;
-      score.innerHTML = "0";
-      score.style.display = "none";
-      menu.style.display = "flex";
+      lastScore!.innerHTML = `Last Score: ${score!.innerHTML}`;
+      score!.innerHTML = "0";
+      score!.style.display = "none";
+      menu!.style.display = "flex";
 
       this.gameState.gameStarted = false;
 
@@ -230,7 +247,7 @@ export class StackGame {
     }
 
     this.gameState.isMovingForward = false;
-    score.innerHTML = `${Number(score.innerHTML) + 1}`;
+    score!.innerHTML = `${Number(score!.innerHTML) + 1}`;
 
     const newBlockWidth = direction === "x" ? overlap : topBlock.sizes.width;
     const newBlockDepth = direction === "z" ? overlap : topBlock.sizes.depth;
@@ -296,17 +313,20 @@ export class StackGame {
   }
 
   private onGameStart(): void {
-    const { score, menu } = getElements();
+    const score =
+      document.querySelector<HTMLHeadingElement>(".stack-game__score");
+    const menu = document.querySelector<HTMLDivElement>(".stack-game__menu");
+
     const { gameStarted } = this.gameState;
 
     if (gameStarted) return;
 
     this.initialConfigGame();
 
-    score.style.display = "block";
-    score.style.color = "#ffffff";
+    score!.style.display = "block";
+    score!.style.color = "#ffffff";
 
-    menu.style.display = "none";
+    menu!.style.display = "none";
 
     this.renderer.setAnimationLoop(this.animate.bind(this));
     this.gameState.gameStarted = true;

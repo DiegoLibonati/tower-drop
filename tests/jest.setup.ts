@@ -1,7 +1,5 @@
 import "@testing-library/jest-dom";
 
-// Mocks
-
 jest.mock("three", () => {
   const originalThree = jest.requireActual("three");
 

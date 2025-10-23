@@ -1,0 +1,13 @@
+FROM node:20.19.0-alpine
+
+WORKDIR /home/app
+
+COPY . .
+
+RUN rm -rf node_modules && rm -rf package-lock.json
+
+RUN npm install
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev"]

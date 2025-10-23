@@ -13,6 +13,15 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 3. Execute: `yarn install` or `npm install`
 4. Execute: `yarn run dev` or `npm run dev`
 
+## Getting Started with Docker
+
+1. Clone the repository with `git clone "repository link"`
+2. Execute: `npm install` or `yarn install` in the terminal
+3. Execute: `docker-compose -f dev.docker-compose.yml build --no-cache` in the terminal
+4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
+
+NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
+
 ## Description
 
 In this page I replicated without gravity the famous mobile game "Stack Game", which consists of stacking blocks one on top of the other. In case of stacking with a block that is not perfectly superimposed to the one below, the block above will lose the part that was not stacked correctly. The game ends when a block is not stacked correctly. To stack you will have to click.
@@ -23,6 +32,9 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 2. CSS3
 3. HTML5
 4. Vite
+5. Nginx
+6. Docker
+7. Three JS
 
 ## Libraries used
 
@@ -58,10 +70,6 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 ## Video
 
 https://github.com/DiegoLibonati/Stack-Game-3D-Page/assets/99032604/67e0b504-95d5-4370-b9be-620787a8e2d7
-
-## Web
-
-[`https://stack-game-3-d-page.vercel.app/`](https://stack-game-3-d-page.vercel.app/)
 
 ## Testing
 

@@ -1,0 +1,14 @@
+services:
+  stack-game-client:
+    build:
+      context: ./
+      dockerfile: Dockerfile.production
+    restart: always
+    ports:
+      - 5173:80
+    networks:
+      - stack-game-net
+
+
+networks:
+  stack-game-net:
