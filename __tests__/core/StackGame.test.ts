@@ -1,5 +1,6 @@
-import { StackGame } from "@/core/StackGame";
 import type { Page } from "@/types/pages";
+
+import { StackGame } from "@/core/StackGame";
 
 describe("StackGame", () => {
   let canvas: HTMLCanvasElement;
