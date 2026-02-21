@@ -1,14 +1,16 @@
-import { Button } from "@src/components/Button/Button";
+import type { Page } from "@/types/pages";
 
-import { StackGame } from "@src/core/StackGame";
+import { Button } from "@/components/Button/Button";
 
-import "@src/pages/StackGamePage/StackGamePage.css";
+import { StackGame } from "@/core/StackGame";
 
-export const StackGamePage = (): HTMLDivElement => {
-  const divRoot = document.createElement("div");
-  divRoot.className = "stack-game-page";
+import "@/pages/StackGamePage/StackGamePage.css";
 
-  divRoot.innerHTML = `
+export const StackGamePage = (): Page => {
+  const main = document.createElement("main") as Page;
+  main.className = "stack-game-page";
+
+  main.innerHTML = `
     <canvas class="stack-game__webgl"></canvas>
 
     <div class="stack-game__container" id="mainContainer">
@@ -23,8 +25,8 @@ export const StackGamePage = (): HTMLDivElement => {
     </div>
   `;
 
-  const canvas = divRoot.querySelector<HTMLCanvasElement>(".stack-game__webgl");
-  const stackGameMenuWrapper = divRoot.querySelector<HTMLDivElement>(
+  const canvas = main.querySelector<HTMLCanvasElement>(".stack-game__webgl");
+  const stackGameMenuWrapper = main.querySelector<HTMLDivElement>(
     ".stack-game__menu-wrapper"
   );
 
@@ -37,7 +39,13 @@ export const StackGamePage = (): HTMLDivElement => {
 
   stackGameMenuWrapper?.append(playButton);
 
-  new StackGame(canvas!);
+  const game = new StackGame(canvas!, main);
 
-  return divRoot;
+  main.cleanup = (): void => {
+    game.dispose();
+
+    playButton.cleanup?.();
+  };
+
+  return main;
 };

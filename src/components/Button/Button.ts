@@ -1,4 +1,5 @@
-import { ButtonProps } from "@src/entities/props";
+import type { ButtonComponent } from "@/types/components";
+import type { ButtonProps } from "@/types/props";
 
 export const Button = ({
   id,
@@ -7,8 +8,8 @@ export const Button = ({
   className,
   children,
   onClick,
-}: ButtonProps): HTMLButtonElement => {
-  const button = document.createElement("button");
+}: ButtonProps): ButtonComponent => {
+  const button = document.createElement("button") as ButtonComponent;
   button.id = id;
   button.type = type ?? "button";
   button.className = `button ${className ?? ""}`;
@@ -16,8 +17,13 @@ export const Button = ({
 
   button.innerHTML = children ?? "";
 
-  if (button.type === "button" && onClick)
+  if (button.type === "button" && onClick) {
     button.addEventListener("click", onClick);
+
+    button.cleanup = (): void => {
+      button.removeEventListener("click", onClick);
+    };
+  }
 
   return button;
 };

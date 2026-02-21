@@ -1,8 +1,8 @@
-export type Sizes = {
+export interface Sizes {
   width: number;
   height: number;
   depth?: number;
-};
+}
 
 export type Coords = Partial<{
   x: number;
@@ -12,13 +12,9 @@ export type Coords = Partial<{
 
 export type Direction = "x" | "y" | "z";
 
-export type Block = {
-  mesh: THREE.Mesh<
-    THREE.BoxGeometry,
-    THREE.MeshLambertMaterial,
-    THREE.Object3DEventMap
-  >;
+export interface Block {
+  mesh: THREE.Mesh<THREE.BoxGeometry, THREE.MeshLambertMaterial>;
   body: CANNON.Body;
   sizes: Sizes;
   direction?: Direction;
-};
+}

@@ -9,6 +9,5 @@ services:
     networks:
       - stack-game-net
 
-
 networks:
   stack-game-net:

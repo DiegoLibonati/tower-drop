@@ -1,13 +1,14 @@
 import * as THREE from "three";
 import * as CANNON from "cannon";
 
-import { Block, Sizes } from "@src/entities/app";
-import {
+import type { Block, Sizes } from "@/types/app";
+import type {
   AddBlockArgs,
   AddFallBlockArgs,
   CreateBlockArgs,
-} from "@src/entities/args";
-import { GameState } from "@src/entities/states";
+} from "@/types/args";
+import type { GameState } from "@/types/states";
+import type { Page } from "@/types/pages";
 
 export class StackGame {
   private scene: THREE.Scene;
@@ -24,7 +25,7 @@ export class StackGame {
     width: 3,
     depth: 3,
   };
-  private blockSpeed: number = 0.039;
+  private blockSpeed = 0.039;
 
   private gameState: GameState = {
     gameStarted: false,
@@ -33,12 +34,22 @@ export class StackGame {
     fallBlocks: [],
   };
 
-  constructor(public canvas: HTMLCanvasElement) {
+  private boundOnWindowResize: (event: UIEvent) => void;
+  private boundOnWindowClick: (event: Event) => void;
+  private boundOnGameStart: () => void;
+
+  private isAnimating = false;
+
+  private btnPlay: HTMLButtonElement | null = null;
+
+  constructor(
+    public canvas: HTMLCanvasElement,
+    private container: Page
+  ) {
     this.scene = new THREE.Scene();
 
     this.world = new CANNON.World();
 
-    // Camera
     const cameraAspect = this.sizes.width / this.sizes.height;
     const cameraWidth = 15;
     const cameraHeight = cameraWidth / cameraAspect;
@@ -56,6 +67,10 @@ export class StackGame {
       canvas: canvas,
       antialias: true,
     });
+
+    this.boundOnWindowResize = this.onWindowResize.bind(this);
+    this.boundOnWindowClick = this.onWindowClick.bind(this);
+    this.boundOnGameStart = this.onGameStart.bind(this);
 
     this.addCamera();
     this.addLights();
@@ -85,26 +100,26 @@ export class StackGame {
   }
 
   private addEventListeners(): void {
-    const btnPlay = this.canvas
-      .closest(".stack-game-page")
-      ?.querySelector<HTMLButtonElement>(".stack-game__button");
+    this.btnPlay = this.container.querySelector<HTMLButtonElement>(
+      ".stack-game__button"
+    );
 
-    window.addEventListener("resize", this.onWindowResize.bind(this));
-    window.addEventListener("click", this.onWindowClick.bind(this));
+    window.addEventListener("resize", this.boundOnWindowResize);
+    window.addEventListener("click", this.boundOnWindowClick);
 
-    btnPlay?.addEventListener("click", this.onGameStart.bind(this));
+    this.btnPlay?.addEventListener("click", this.boundOnGameStart);
   }
 
   private addBlock({ coords, sizes, direction }: AddBlockArgs): void {
     const { blocks } = this.gameState;
 
-    const y = coords.y ? coords.y : sizes.height * blocks.length;
+    const y = coords.y ?? sizes.height * blocks.length;
 
     const block = this.createBlock({
       coords: {
-        x: coords.x,
+        x: coords.x!,
         y: y,
-        z: coords.z,
+        z: coords.z!,
       },
       sizes: sizes,
       isBlockFalling: false,
@@ -112,27 +127,25 @@ export class StackGame {
 
     block.direction = direction;
 
-    blocks.push(block as Block);
+    blocks.push(block);
   }
 
   private addFallBlock({ coords, sizes }: AddFallBlockArgs): void {
     const { blocks, fallBlocks } = this.gameState;
 
-    const y = coords.y
-      ? coords.y
-      : this.blockSizes.height * (blocks.length - 1);
+    const y = coords.y ?? this.blockSizes.height * (blocks.length - 1);
 
     const fallBlock = this.createBlock({
       coords: {
-        x: coords.x,
+        x: coords.x!,
         y: y,
-        z: coords.z,
+        z: coords.z!,
       },
       sizes: sizes,
       isBlockFalling: true,
     });
 
-    fallBlocks.push(fallBlock as Block);
+    fallBlocks.push(fallBlock);
   }
 
   private configWorld(): void {
@@ -150,21 +163,40 @@ export class StackGame {
       const mesh = block.mesh;
 
       mesh.geometry.dispose();
-      mesh.material.dispose();
+
+      const material = mesh.material as
+        | THREE.Material
+        | THREE.Material[]
+        | undefined;
+
+      if (material) {
+        if (Array.isArray(material)) {
+          material.forEach((mat) => {
+            if ("dispose" in mat && typeof mat.dispose === "function") {
+              mat.dispose();
+            }
+          });
+        } else {
+          if ("dispose" in material && typeof material.dispose === "function") {
+            material.dispose();
+          }
+        }
+      }
+
       this.scene.remove(mesh);
+
+      this.world.remove(block.body);
     }
 
     this.gameState.blocks = [];
     this.gameState.fallBlocks = [];
     this.gameState.isMovingForward = false;
 
-    // Base
     this.addBlock({
       coords: { x: 0, z: 0 },
       sizes: { ...this.blockSizes },
       direction: "z",
     });
-    // First Block
     this.addBlock({
       coords: { x: -10, z: 0 },
       sizes: { ...this.blockSizes },
@@ -206,9 +238,10 @@ export class StackGame {
 
   private onWindowClick(e: Event): void {
     const score =
-      document.querySelector<HTMLHeadingElement>(".stack-game__score");
-    const menu = document.querySelector<HTMLDivElement>(".stack-game__menu");
-    const lastScore = document.querySelector<HTMLHeadingElement>(
+      this.container.querySelector<HTMLHeadingElement>(".stack-game__score");
+    const menu =
+      this.container.querySelector<HTMLDivElement>(".stack-game__menu");
+    const lastScore = this.container.querySelector<HTMLHeadingElement>(
       ".stack-game__last-score"
     );
     const { blocks, gameStarted } = this.gameState;
@@ -220,6 +253,8 @@ export class StackGame {
 
     const topBlock = blocks[blocks.length - 1];
     const bottomBlock = blocks[blocks.length - 2];
+
+    if (!topBlock || !bottomBlock) return;
 
     const direction = topBlock.direction!;
 
@@ -234,12 +269,16 @@ export class StackGame {
     const overlap = size! - absDelta;
 
     if (overlap < 0) {
-      this.renderer.setAnimationLoop(null);
+      this.stopAnimation();
 
-      lastScore!.innerHTML = `Last Score: ${score!.innerHTML}`;
-      score!.innerHTML = "0";
-      score!.style.display = "none";
-      menu!.style.display = "flex";
+      if (lastScore && score) {
+        lastScore.innerHTML = `Last Score: ${score.innerHTML}`;
+        score.innerHTML = "0";
+        score.style.display = "none";
+      }
+      if (menu) {
+        menu.style.display = "flex";
+      }
 
       this.gameState.gameStarted = false;
 
@@ -247,13 +286,15 @@ export class StackGame {
     }
 
     this.gameState.isMovingForward = false;
-    score!.innerHTML = `${Number(score!.innerHTML) + 1}`;
+    if (score) {
+      score.innerHTML = `${Number(score.innerHTML) + 1}`;
+    }
 
     const newBlockWidth = direction === "x" ? overlap : topBlock.sizes.width;
     const newBlockDepth = direction === "z" ? overlap : topBlock.sizes.depth;
 
     topBlock.sizes.width = newBlockWidth;
-    topBlock.sizes.depth = newBlockDepth;
+    topBlock.sizes.depth = newBlockDepth!;
 
     topBlock.mesh.scale[direction] = overlap / size!;
     topBlock.mesh.position[direction] -= delta / 2;
@@ -269,8 +310,6 @@ export class StackGame {
 
     topBlock.body.shapes = [];
     topBlock.body.addShape(shape);
-
-    // Fall Part
 
     const fallBlock = (overlap / 2 + absDelta / 2) * Math.sign(delta);
     const fallBlockX =
@@ -290,11 +329,9 @@ export class StackGame {
       sizes: {
         width: fallBlockWidth,
         height: this.blockSizes.height,
-        depth: fallBlockDepth,
+        depth: fallBlockDepth!,
       },
     });
-
-    // End Fall Part
 
     const newBlockX = direction === "x" ? topBlock.mesh.position.x : -10;
     const newBlockZ = direction === "z" ? topBlock.mesh.position.z : -10;
@@ -306,7 +343,7 @@ export class StackGame {
       sizes: {
         height: this.blockSizes.height,
         width: newBlockWidth,
-        depth: newBlockDepth,
+        depth: newBlockDepth!,
       },
       direction: newBlockDirection,
     });
@@ -314,8 +351,9 @@ export class StackGame {
 
   private onGameStart(): void {
     const score =
-      document.querySelector<HTMLHeadingElement>(".stack-game__score");
-    const menu = document.querySelector<HTMLDivElement>(".stack-game__menu");
+      this.container.querySelector<HTMLHeadingElement>(".stack-game__score");
+    const menu =
+      this.container.querySelector<HTMLDivElement>(".stack-game__menu");
 
     const { gameStarted } = this.gameState;
 
@@ -323,12 +361,16 @@ export class StackGame {
 
     this.initialConfigGame();
 
-    score!.style.display = "block";
-    score!.style.color = "#ffffff";
+    if (score) {
+      score.style.display = "block";
+      score.style.color = "#ffffff";
+    }
 
-    menu!.style.display = "none";
+    if (menu) {
+      menu.style.display = "none";
+    }
 
-    this.renderer.setAnimationLoop(this.animate.bind(this));
+    this.startAnimation();
     this.gameState.gameStarted = true;
   }
 
@@ -353,7 +395,6 @@ export class StackGame {
     mesh.position.set(x!, y!, z!);
     this.scene.add(mesh);
 
-    // Gravity with Cannon
     const shape = new CANNON.Box(
       new CANNON.Vec3(sizes.width / 2, sizes.height / 2, sizes.depth! / 2)
     );
@@ -383,10 +424,14 @@ export class StackGame {
   }
 
   private animate(): void {
+    if (!this.isAnimating) return;
+
     const { blocks, isMovingForward } = this.gameState;
 
     const topBlock = blocks[blocks.length - 1];
     const bottomBlock = blocks[blocks.length - 2];
+
+    if (!topBlock || !bottomBlock) return;
 
     const direction = topBlock.direction!;
 
@@ -415,5 +460,65 @@ export class StackGame {
 
     this.updatePhysics();
     this.render();
+
+    this.renderer.setAnimationLoop(this.animate.bind(this));
+  }
+
+  private startAnimation(): void {
+    this.isAnimating = true;
+    this.renderer.setAnimationLoop(this.animate.bind(this));
+  }
+
+  private stopAnimation(): void {
+    this.isAnimating = false;
+    this.renderer.setAnimationLoop(null);
+  }
+
+  public dispose(): void {
+    this.stopAnimation();
+
+    window.removeEventListener("resize", this.boundOnWindowResize);
+    window.removeEventListener("click", this.boundOnWindowClick);
+
+    if (this.btnPlay) {
+      this.btnPlay.removeEventListener("click", this.boundOnGameStart);
+    }
+
+    const { blocks, fallBlocks } = this.gameState;
+    const allBlocks = blocks.concat(fallBlocks);
+
+    for (const block of allBlocks) {
+      block.mesh.geometry.dispose();
+
+      const material = block.mesh.material as
+        | THREE.Material
+        | THREE.Material[]
+        | undefined;
+
+      if (material) {
+        if (Array.isArray(material)) {
+          material.forEach((mat) => {
+            if ("dispose" in mat && typeof mat.dispose === "function") {
+              mat.dispose();
+            }
+          });
+        } else {
+          if ("dispose" in material && typeof material.dispose === "function") {
+            material.dispose();
+          }
+        }
+      }
+
+      this.scene.remove(block.mesh);
+
+      this.world.remove(block.body);
+    }
+
+    this.renderer.dispose();
+
+    this.scene.clear();
+
+    this.gameState.blocks = [];
+    this.gameState.fallBlocks = [];
   }
 }

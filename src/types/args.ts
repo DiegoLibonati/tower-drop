@@ -1,4 +1,4 @@
-import { Coords, Sizes, Direction } from "@src/entities/app";
+import type { Coords, Sizes, Direction } from "@/types/app";
 
 export interface AddBlockArgs {
   coords: Coords;

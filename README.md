@@ -9,9 +9,11 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 ## Getting Started
 
 1. Clone the repository
-2. Join to the correct path of the clone
-3. Execute: `yarn install` or `npm install`
-4. Execute: `yarn run dev` or `npm run dev`
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`
 
 ## Getting Started with Docker
 
@@ -48,19 +50,26 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 #### devDependencies
 
 ```
+"@eslint/js": "^9.39.2"
 "@testing-library/dom": "^10.4.0"
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/user-event": "^14.5.2"
-"@types/cannon": "^0.1.12"
 "@types/jest": "^29.5.14"
-"@types/node": "^20.10.6"
 "@types/three": "^0.161.2"
+"@types/cannon": "^0.1.12"
+"eslint": "^9.39.2"
+"eslint-config-prettier": "^10.1.8"
+"eslint-plugin-prettier": "^5.5.5"
+"globals": "^17.3.0"
+"husky": "^9.1.7"
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
+"lint-staged": "^16.2.7"
+"prettier": "^3.8.1"
 "ts-jest": "^29.2.5"
-"ts-node": "^10.9.2"
 "typescript": "^5.3.3"
-"vite": "^7.1.5"
+"typescript-eslint": "^8.54.0"
+"vite": "^7.1.6"
 ```
 
 ## Portfolio Link
@@ -73,7 +82,15 @@ https://github.com/DiegoLibonati/Stack-Game-3D-Page/assets/99032604/67e0b504-95d
 
 ## Testing
 
-1. Join to the correct path of the clone
-2. Execute: `yarn test` or `npm test`
+1. Navigate to the project folder
+2. Execute: `npm test`
+
+For coverage report:
+
+```bash
+npm run test:coverage
+```
 
 ## Known Issues
+
+None at the moment.

@@ -1,8 +1,8 @@
-import { Block } from "@src/entities/app";
+import type { Block } from "@/types/app";
 
-export type GameState = {
+export interface GameState {
   gameStarted: boolean;
   isMovingForward: boolean;
   blocks: Block[];
   fallBlocks: Block[];
-};
+}
