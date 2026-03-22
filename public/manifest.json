@@ -1,7 +1,7 @@
 {
-  "name": "Template Vite Vanilla TS",
-  "short_name": "Template",
-  "description": "Personal template for carrying out a project with Vite Vanilla and TypeScript.",
+  "name": "Stack Game 3D",
+  "short_name": "Stack Game",
+  "description": "In this page I replicated without gravity the famous mobile game 'Stack Game', which consists of stacking blocks one on top of the other. In case of stacking with a block that is not perfectly superimposed to the one below, the block above will lose the part that was not stacked correctly. The game ends when a block is not stacked correctly. To stack you will have to click.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
