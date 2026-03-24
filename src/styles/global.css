@@ -6,7 +6,7 @@
   --color-primary-hover: #0077cc;
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-black-int: 0, 0, 0;
+  --color-black-rgb: 0, 0, 0;
 
   /* Typography */
   --font-family-primary: "Roboto", Helvetica, sans-serif;

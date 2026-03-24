@@ -67,7 +67,7 @@ describe("StackGamePage", () => {
   it("should render play button", () => {
     renderPage();
 
-    const playButton = screen.getByRole("button", { name: "play button" });
+    const playButton = screen.getByRole("button", { name: "Start game" });
     expect(playButton).toBeInTheDocument();
     expect(playButton.textContent).toBe("¡Play!");
   });

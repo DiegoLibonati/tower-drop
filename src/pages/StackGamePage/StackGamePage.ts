@@ -32,7 +32,7 @@ export const StackGamePage = (): Page => {
 
   const playButton = Button({
     id: "playbtn",
-    ariaLabel: "play button",
+    ariaLabel: "Start game",
     className: "stack-game__button",
     children: "¡Play!",
   });
