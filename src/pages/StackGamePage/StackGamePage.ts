@@ -1,12 +1,12 @@
 import type { Page } from "@/types/pages";
 
-import { Button } from "@/components/Button/Button";
+import Button from "@/components/Button/Button";
 
 import { StackGame } from "@/core/StackGame";
 
 import "@/pages/StackGamePage/StackGamePage.css";
 
-export const StackGamePage = (): Page => {
+const StackGamePage = (): Page => {
   const main = document.createElement("main") as Page;
   main.className = "stack-game-page";
 
@@ -49,3 +49,5 @@ export const StackGamePage = (): Page => {
 
   return main;
 };
+
+export default StackGamePage;

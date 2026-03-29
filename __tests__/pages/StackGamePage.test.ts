@@ -2,7 +2,7 @@ import { screen } from "@testing-library/dom";
 
 import type { Page } from "@/types/pages";
 
-import { StackGamePage } from "@/pages/StackGamePage/StackGamePage";
+import StackGamePage from "@/pages/StackGamePage/StackGamePage";
 
 const renderPage = (): Page => {
   const container = StackGamePage();

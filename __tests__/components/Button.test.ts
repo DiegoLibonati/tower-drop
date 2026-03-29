@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import type { ButtonProps } from "@/types/props";
 import type { ButtonComponent } from "@/types/components";
 
-import { Button } from "@/components/Button/Button";
+import Button from "@/components/Button/Button";
 
 const renderComponent = (props: ButtonProps): ButtonComponent => {
   const container = Button(props);
