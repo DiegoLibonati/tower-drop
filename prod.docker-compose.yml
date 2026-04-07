@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.production
     restart: always
     ports:
-      - 5173:80
+      - 3000:80
     networks:
       - stack-game-net
 
