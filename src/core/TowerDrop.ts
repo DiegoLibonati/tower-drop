@@ -10,7 +10,7 @@ import type {
 import type { GameState } from "@/types/states";
 import type { Page } from "@/types/pages";
 
-export class StackGame {
+export class TowerDrop {
   private scene: THREE.Scene;
   private camera: THREE.OrthographicCamera;
   private renderer: THREE.WebGLRenderer;
@@ -101,7 +101,7 @@ export class StackGame {
 
   private addEventListeners(): void {
     this.btnPlay = this.container.querySelector<HTMLButtonElement>(
-      ".stack-game__button"
+      ".tower-drop__button"
     );
 
     window.addEventListener("resize", this.boundOnWindowResize);
@@ -238,11 +238,11 @@ export class StackGame {
 
   private onWindowClick(e: Event): void {
     const score =
-      this.container.querySelector<HTMLHeadingElement>(".stack-game__score");
+      this.container.querySelector<HTMLHeadingElement>(".tower-drop__score");
     const menu =
-      this.container.querySelector<HTMLDivElement>(".stack-game__menu");
+      this.container.querySelector<HTMLDivElement>(".tower-drop__menu");
     const lastScore = this.container.querySelector<HTMLHeadingElement>(
-      ".stack-game__last-score"
+      ".tower-drop__last-score"
     );
     const { blocks, gameStarted } = this.gameState;
 
@@ -351,9 +351,9 @@ export class StackGame {
 
   private onGameStart(): void {
     const score =
-      this.container.querySelector<HTMLHeadingElement>(".stack-game__score");
+      this.container.querySelector<HTMLHeadingElement>(".tower-drop__score");
     const menu =
-      this.container.querySelector<HTMLDivElement>(".stack-game__menu");
+      this.container.querySelector<HTMLDivElement>(".tower-drop__menu");
 
     const { gameStarted } = this.gameState;
 

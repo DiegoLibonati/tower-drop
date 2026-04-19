@@ -1,13 +1,13 @@
 import "@/index.css";
-import StackGamePage from "@/pages/StackGamePage/StackGamePage";
+import TowerDropPage from "@/pages/TowerDropPage/TowerDropPage";
 
 const onInit = (): void => {
   const app = document.querySelector<HTMLDivElement>("#app");
 
   if (!app) throw new Error(`You must render a container to mount the app.`);
 
-  const stackGamePage = StackGamePage();
-  app.appendChild(stackGamePage);
+  const towerDropPage = TowerDropPage();
+  app.appendChild(towerDropPage);
 };
 
 document.addEventListener("DOMContentLoaded", onInit);

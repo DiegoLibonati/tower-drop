@@ -1,7 +1,7 @@
 {
-  "name": "Stack Game 3D",
-  "short_name": "Stack Game",
-  "description": "In this page I replicated without gravity the famous mobile game 'Stack Game', which consists of stacking blocks one on top of the other. In case of stacking with a block that is not perfectly superimposed to the one below, the block above will lose the part that was not stacked correctly. The game ends when a block is not stacked correctly. To stack you will have to click.",
+  "name": "TowerDrop",
+  "short_name": "TowerDrop",
+  "description": "TowerDrop is a browser-based 3D block-stacking game inspired by the classic mobile game 'Stack'. The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

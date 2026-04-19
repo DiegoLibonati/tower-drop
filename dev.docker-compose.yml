@@ -1,5 +1,5 @@
 services:
-  stack-game-client:
+  tower-drop-client:
     build:
       context: ./
       dockerfile: Dockerfile.development
@@ -10,8 +10,8 @@ services:
     ports:
       - 3000:3000
     networks:
-      - stack-game-net
+      - tower-drop-net
     tty: true
 
 networks:
-  stack-game-net:
+  tower-drop-net:

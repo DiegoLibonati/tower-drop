@@ -1,1 +1,1 @@
-export default "test-image";
+export default "test-file-stub";

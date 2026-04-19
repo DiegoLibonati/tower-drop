@@ -1,4 +1,4 @@
-.stack-game__webgl {
+.tower-drop__webgl {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,7 +7,7 @@
   outline: none;
 }
 
-.stack-game__container {
+.tower-drop__container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   height: 100vh;
 }
 
-.stack-game__score {
+.tower-drop__score {
   display: none;
   position: absolute;
   top: 3.75rem;
@@ -25,7 +25,7 @@
   font-weight: 500;
 }
 
-.stack-game__menu {
+.tower-drop__menu {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@
   height: 100%;
 }
 
-.stack-game__menu-wrapper {
+.tower-drop__menu-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,19 +44,19 @@
   height: 50%;
 }
 
-.stack-game__title {
+.tower-drop__title {
   font-size: 2.5rem;
   color: var(--color-white);
   text-align: center;
 }
 
-.stack-game__last-score {
+.tower-drop__last-score {
   font-size: 1.5rem;
   color: var(--color-white);
   text-align: center;
 }
 
-.stack-game__button {
+.tower-drop__button {
   padding: 0.625rem 1.25rem;
   border-radius: 0.625rem;
   font-size: 1rem;
@@ -68,6 +68,6 @@
   transition: background-color 0.3s ease;
 }
 
-.stack-game__button:hover {
+.tower-drop__button:hover {
   background-color: var(--color-primary-hover);
 }

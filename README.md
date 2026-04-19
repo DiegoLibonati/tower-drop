@@ -1,4 +1,4 @@
-# Stack Game 3D
+# TowerDrop
 
 ## Educational Purpose
 
@@ -26,7 +26,13 @@ NOTE: You have to be standing in the folder containing the: `dev.docker-compose.
 
 ## Description
 
-In this page I replicated without gravity the famous mobile game "Stack Game", which consists of stacking blocks one on top of the other. In case of stacking with a block that is not perfectly superimposed to the one below, the block above will lose the part that was not stacked correctly. The game ends when a block is not stacked correctly. To stack you will have to click.
+**TowerDrop** is a browser-based 3D block-stacking game inspired by the classic mobile game "Stack". The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.
+
+Each round, a new block slides back and forth above the current stack. When you click, it stops and locks into place — but only the portion that overlaps with the block underneath survives. Any overhanging section breaks off and falls with realistic physics. If a block misses entirely and there is no overlap at all, the game ends immediately.
+
+The game is rendered in 3D using Three.js with an orthographic camera that follows the stack upward as it grows, giving it a clean isometric look. Block physics — including the falling pieces — are handled by Cannon.js, so cut-off fragments tumble and drop naturally. Each new block is colored with a smooth hue progression, making the tower visually distinct as it gets taller.
+
+The entire application runs in the browser with no backend required. It is built with TypeScript and Vite, keeping the codebase strongly typed and the build fast. The UI is minimal by design: a score counter, a last-score display between rounds, and a single play button to start or restart the game. There are no lives, no time limits, and no power-ups — just precision and timing.
 
 ## Technologies used
 
@@ -74,11 +80,7 @@ In this page I replicated without gravity the famous mobile game "Stack Game", w
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Stack-Game-3D`](https://www.diegolibonati.com.ar/#/project/Stack-Game-3D)
-
-## Video
-
-https://github.com/DiegoLibonati/Stack-Game-3D-Page/assets/99032604/67e0b504-95d5-4370-b9be-620787a8e2d7
+[`https://www.diegolibonati.com.ar/#/project/tower-drop`](https://www.diegolibonati.com.ar/#/project/tower-drop)
 
 ## Testing
 
