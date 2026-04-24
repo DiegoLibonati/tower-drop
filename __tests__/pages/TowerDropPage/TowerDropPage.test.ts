@@ -81,7 +81,9 @@ describe("TowerDropPage", () => {
       const wrapper = document.querySelector<HTMLDivElement>(
         ".tower-drop__menu-wrapper"
       );
-      expect(wrapper?.querySelector("#playbtn")).toBeInTheDocument();
+      expect(
+        wrapper?.querySelector<HTMLButtonElement>("#playbtn")
+      ).toBeInTheDocument();
     });
   });
 
