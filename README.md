@@ -1,4 +1,4 @@
-# TowerDrop
+# Tower Drop
 
 ## Educational Purpose
 
@@ -26,7 +26,7 @@ NOTE: You have to be standing in the folder containing the: `dev.docker-compose.
 
 ## Description
 
-**TowerDrop** is a browser-based 3D block-stacking game inspired by the classic mobile game "Stack". The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.
+**Tower Drop** is a browser-based 3D block-stacking game inspired by the classic mobile game "Stack". The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.
 
 Each round, a new block slides back and forth above the current stack. When you click, it stops and locks into place — but only the portion that overlaps with the block underneath survives. Any overhanging section breaks off and falls with realistic physics. If a block misses entirely and there is no overlap at all, the game ends immediately.
 

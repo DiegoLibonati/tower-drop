@@ -51,7 +51,7 @@ describe("TowerDropPage", () => {
     it("should render the game title", () => {
       renderPage();
       expect(
-        screen.getByRole("heading", { name: "TowerDrop", level: 2 })
+        screen.getByRole("heading", { name: "Tower Drop", level: 2 })
       ).toBeInTheDocument();
     });
 

@@ -1,7 +1,7 @@
 {
-  "name": "TowerDrop",
-  "short_name": "TowerDrop",
-  "description": "TowerDrop is a browser-based 3D block-stacking game inspired by the classic mobile game 'Stack'. The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.",
+  "name": "Tower Drop",
+  "short_name": "Tower Drop",
+  "description": "Tower Drop is a browser-based 3D block-stacking game inspired by the classic mobile game Stack.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
