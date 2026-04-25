@@ -4,26 +4,25 @@ import type { Page } from "@/types/pages";
 
 import TowerDropPage from "@/pages/TowerDropPage/TowerDropPage";
 
-let currentPage: Page | null = null;
+let page: Page | undefined;
 
 const renderPage = (): Page => {
-  currentPage = TowerDropPage();
-  document.body.appendChild(currentPage);
-  return currentPage;
+  page = TowerDropPage();
+  document.body.appendChild(page);
+  return page;
 };
 
 describe("TowerDropPage", () => {
   afterEach(() => {
-    currentPage?.cleanup?.();
+    page?.cleanup?.();
     document.body.innerHTML = "";
-    currentPage = null;
+    jest.restoreAllMocks();
   });
 
   describe("rendering", () => {
     it("should render a main element with the tower-drop-page class", () => {
       renderPage();
-      const main = document.querySelector<HTMLElement>("main");
-      expect(main).toHaveClass("tower-drop-page");
+      expect(screen.getByRole("main")).toHaveClass("tower-drop-page");
     });
 
     it("should render the webgl canvas element", () => {

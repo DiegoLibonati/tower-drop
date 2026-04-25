@@ -24,6 +24,7 @@ const renderComponent = (props: Partial<ButtonProps> = {}): ButtonComponent => {
 describe("Button", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
   describe("rendering", () => {
