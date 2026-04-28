@@ -61,6 +61,7 @@ The entire application runs in the browser with no backend required. It is built
 "@testing-library/jest-dom": "^6.6.3"
 "@testing-library/user-event": "^14.5.2"
 "@types/jest": "^30.0.0"
+"@types/node": "^22.0.0"
 "@types/three": "^0.161.2"
 "@types/cannon": "^0.1.12"
 "eslint": "^9.39.2"
