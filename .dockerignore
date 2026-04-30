@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+.git
+.gitignore
+.claude
+.vscode
+.idea
+
+*.log
+npm-debug.log*
+
+*.local
+.env*
+
+__tests__
+coverage

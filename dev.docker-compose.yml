@@ -3,7 +3,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.development
-    restart: always
+    restart: unless-stopped
     volumes:
       - .:/home/app
       - /home/app/node_modules
@@ -11,6 +11,7 @@ services:
       - 3000:3000
     networks:
       - tower-drop-net
+    stdin_open: true
     tty: true
 
 networks:
