@@ -1,5 +1,5 @@
 services:
-  tower-drop-client:
+  tower-drop-app:
     build:
       context: ./
       dockerfile: Dockerfile.development

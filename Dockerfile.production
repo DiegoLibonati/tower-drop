@@ -21,7 +21,7 @@ RUN touch /run/nginx.pid \
     && mkdir -p /var/cache/nginx \
     && chown -R appuser:appuser /run/nginx.pid /var/cache/nginx /usr/share/nginx/html /etc/nginx
 
-EXPOSE 80
+EXPOSE 8080
 
 USER appuser
 

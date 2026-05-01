@@ -1,15 +1,15 @@
 services:
-  tower-drop-client:
+  tower-drop-app:
     build:
       context: ./
       dockerfile: Dockerfile.production
     restart: always
     ports:
-      - 3000:80
+      - 3000:8080
     networks:
       - tower-drop-net
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:80"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080"]
       interval: 30s
       timeout: 5s
       retries: 3
