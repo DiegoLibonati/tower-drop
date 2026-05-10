@@ -6,24 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
-
-## Getting Started with Docker
-
-1. Clone the repository with `git clone "repository link"`
-2. Execute: `npm install` or `yarn install` in the terminal
-3. Execute: `docker-compose -f dev.docker-compose.yml build --no-cache` in the terminal
-4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
-
-NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
-
 ## Description
 
 **Tower Drop** is a browser-based 3D block-stacking game inspired by the classic mobile game "Stack". The objective is simple: stack as many blocks as possible by clicking at the right moment to drop the moving block onto the one below. The higher your stack, the higher your score.
@@ -45,6 +27,8 @@ The entire application runs in the browser with no backend required. It is built
 7. Three JS
 
 ## Libraries used
+
+The project relies on a small runtime stack (rendering + physics) and a broader dev toolchain for typing, testing, linting and formatting.
 
 #### Dependencies
 
@@ -79,11 +63,20 @@ The entire application runs in the browser with no backend required. It is built
 "vite": "^7.1.6"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/tower-drop`](https://www.diegolibonati.com.ar/#/project/tower-drop)
+To run the game locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`.
 
 ## Testing
+
+With the project installed and running locally, you can validate the codebase against the test suite.
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -94,7 +87,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond the test suite, dependencies should be audited for known vulnerabilities before shipping a build.
 
 ### npm audit
 
@@ -104,6 +99,30 @@ Check for vulnerabilities in dependencies:
 npm audit
 ```
 
+## Production
+
+Once tests pass (see [Testing](#testing)) and dependencies are clean (see [Security Audit](#security-audit)), the app can be containerized for deployment. The repository ships with two Docker setups: one for local development (hot reload via Vite) and one for production (static build served by Nginx).
+
+### Development with Docker
+
+1. Clone the repository with `git clone "repository link"`
+2. Execute: `npm install` or `yarn install` in the terminal
+3. Execute: `docker-compose -f dev.docker-compose.yml build --no-cache` in the terminal
+4. Once built, you must execute the command: `docker-compose -f dev.docker-compose.yml up --force-recreate` in the terminal
+
+NOTE: You have to be standing in the folder containing the: `dev.docker-compose.yml` and you need to install `Docker Desktop` if you are in Windows.
+
+### Production with Docker
+
+1. Execute: `docker-compose -f prod.docker-compose.yml build --no-cache`
+2. Execute: `docker-compose -f prod.docker-compose.yml up --force-recreate`
+
+The production container builds the Vite bundle and serves it through Nginx on port `3000` (mapped to internal `8080`), with a healthcheck wired into the compose file.
+
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/tower-drop`](https://www.diegolibonati.com.ar/#/project/tower-drop)
