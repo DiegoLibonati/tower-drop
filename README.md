@@ -99,6 +99,58 @@ Check for vulnerabilities in dependencies:
 npm audit
 ```
 
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch.
+
+### Pipeline overview
+
+```
+              ┌─── PR or push to main ───┐
+              ▼                          ▼
+┌──────────────────┐   ┌──────────────┐   ┌──────────────┐   ┌──────────────────────┐
+│  lint-and-audit  │──▶│   testing    │──▶│    build     │──▶│     build-docker     │
+│ lint · type-check│   │ jest (jsdom) │   │ vite build   │   │ dev + prod images    │
+└──────────────────┘   └──────────────┘   └──────────────┘   └──────────────────────┘
+```
+
+Jobs run sequentially through `needs:`, so a failure in any earlier stage short-circuits the rest of the pipeline. Every job checks out the repo, sets up Node from `.nvmrc` with npm cache, and runs `npm ci` before its own command.
+
+### Validation jobs (run on every PR and push)
+
+1. **`lint-and-audit`** — runs `npm run lint` (ESLint) and `npm run type-check` (`tsc --noEmit`). Despite the job name, dependency auditing (see [Security Audit](#security-audit)) is intentionally kept out of CI and meant to be run locally before shipping a build.
+2. **`testing`** — runs `npm run test` (Jest with `jest-environment-jsdom`; Three.js and Cannon.js are fully mocked in `jest.setup.ts`, so no WebGL is required on the runner).
+3. **`build`** — runs `npm run build` (TypeScript compile + Vite production bundle), proving the codebase builds end-to-end.
+4. **`build-docker`** — smoke-builds both container images that ship with the repo: `Dockerfile.development` tagged `app:dev` and `Dockerfile.production` tagged `app:prod`. This guarantees both Docker setups described in [Production](#production) stay buildable.
+
+### Where the build outputs live
+
+| Output                                    | Location                     |
+| ----------------------------------------- | ---------------------------- |
+| Validation logs (lint, type-check, tests) | **Actions** tab on GitHub    |
+| Vite production bundle (`dist/`)          | Ephemeral, inside the runner |
+| Docker images (`app:dev`, `app:prod`)     | Ephemeral, inside the runner |
+
+> **Note:** the pipeline does not publish artifacts or container images to a registry — its sole purpose is to validate that every change to `main` is lintable, typechecks, passes tests, bundles, and produces both Docker images successfully.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run type-check
+
+# testing
+npm run test
+
+# build
+npm run build
+
+# build-docker
+docker build -f Dockerfile.development -t app:dev .
+docker build -f Dockerfile.production -t app:prod .
+```
+
 ## Production
 
 Once tests pass (see [Testing](#testing)) and dependencies are clean (see [Security Audit](#security-audit)), the app can be containerized for deployment. The repository ships with two Docker setups: one for local development (hot reload via Vite) and one for production (static build served by Nginx).
