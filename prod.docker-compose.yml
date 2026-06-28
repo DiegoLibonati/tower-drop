@@ -1,11 +1,9 @@
 services:
   tower-drop-app:
-    build:
-      context: ./
-      dockerfile: Dockerfile.production
+    image: ghcr.io/diegolibonati/tower-drop:latest
     restart: always
     ports:
-      - 3000:8080
+      - "${APP_PORT:-9001}:8080"
     networks:
       - tower-drop-net
     healthcheck:
