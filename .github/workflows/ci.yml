@@ -100,6 +100,17 @@ jobs:
           sudo dpkg -i cloudflared.deb
           cloudflared --version
 
+      - name: Debug cloudflared service token
+        run: |
+          echo "=== versión ==="
+          cloudflared --version
+          echo "=== probando ProxyCommand directo ==="
+          timeout 25 cloudflared access ssh \
+            --hostname "${{ secrets.SSH_HOST }}" \
+            --service-token-id "${{ secrets.CF_ACCESS_CLIENT_ID }}" \
+            --service-token-secret "${{ secrets.CF_ACCESS_CLIENT_SECRET }}" \
+            --log-level debug 2>&1 | head -40 || echo "(timeout o cierre esperado)"
+
       - name: Setup SSH key and config
         run: |
           mkdir -p ~/.ssh
