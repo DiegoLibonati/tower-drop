@@ -127,7 +127,7 @@ Jobs run sequentially through `needs:`, so a failure in any earlier stage short-
 
 ### Deployment job (push to `main` only)
 
-5. **`deploy`** — gated to `push` events on `main` and scoped to a `production` environment. It copies `prod.docker-compose.yml` to the server over **SCP**, then over **SSH** runs `docker compose pull`, `docker compose up -d` (recreating the container with the freshly published image) and `docker image prune -f`. The SSH connection data lives in repository **secrets** (`SSH_HOST`, `SSH_USER`, `SSH_KEY`, `DEPLOY_PATH`, and optional `SSH_PORT`) and is never exposed to pull requests. Because the GHCR image is public, the server pulls it without authenticating — it only needs Docker and the compose file the pipeline ships (no source checkout, Node or local build).
+5. **`deploy`** — gated to `push` events on `main` and scoped to a `production` environment. The runner installs **`cloudflared`**, writes the SSH key plus an SSH `config` whose `ProxyCommand` tunnels the connection through **Cloudflare Access** (so the server's SSH port is never exposed to the public internet), then copies `prod.docker-compose.yml` to the server over **SCP** and over **SSH** runs `docker compose pull`, `docker compose up -d` (recreating the container with the freshly published image) and `docker image prune -f`. The connection data lives in repository **secrets** (`SSH_HOST`, `SSH_USER`, `SSH_KEY`, `DEPLOY_PATH`, plus the Cloudflare Access service-token pair `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET`) and is never exposed to pull requests. Because the GHCR image is public, the server pulls it without authenticating — it only needs Docker and the compose file the pipeline ships (no source checkout, Node or local build).
 
 ### Where the build outputs live
 
@@ -192,7 +192,7 @@ The app is then available at `http://localhost:9001`, served by Nginx with a hea
 
 ### Continuous Deployment
 
-Every push to `main` that passes the pipeline is deployed automatically by the `deploy` job (see [Continuous Integration & Deployment](#continuous-integration--deployment)): the image is pushed to GHCR, `prod.docker-compose.yml` is copied to the server, and the container is recreated over SSH. The server only needs **Docker** and the compose file the pipeline ships. Set the `SSH_HOST`, `SSH_USER`, `SSH_KEY`, `DEPLOY_PATH` (and optional `SSH_PORT`) repository secrets to enable it, and make the GHCR package public after the first push so the server can pull it without credentials.
+Every push to `main` that passes the pipeline is deployed automatically by the `deploy` job (see [Continuous Integration & Deployment](#continuous-integration--deployment)): the image is pushed to GHCR, `prod.docker-compose.yml` is copied to the server, and the container is recreated over SSH. The SSH session is tunneled through **Cloudflare Access** with `cloudflared`, so the server's SSH port stays closed to the public internet. The server only needs **Docker** and the compose file the pipeline ships. Set the `SSH_HOST`, `SSH_USER`, `SSH_KEY`, `DEPLOY_PATH`, `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET` repository secrets to enable it, and make the GHCR package public after the first push so the server can pull it without credentials.
 
 ## Known Issues
 
