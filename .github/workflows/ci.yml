@@ -94,10 +94,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
 
-      - name: Install cloudflared
+      - name: Install cloudflared (pinned 2026.5.1 — service-token bug in 2026.6.x)
         run: |
-          curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
+          curl -fsSL https://github.com/cloudflare/cloudflared/releases/download/2026.5.1/cloudflared-linux-amd64.deb -o cloudflared.deb
           sudo dpkg -i cloudflared.deb
+          cloudflared --version
 
       - name: Setup SSH key and config
         run: |
@@ -109,7 +110,7 @@ jobs:
             HostName ${{ secrets.SSH_HOST }}
             User ${{ secrets.SSH_USER }}
             IdentityFile ~/.ssh/deploy_key
-            ProxyCommand cloudflared access ssh --hostname %h --id ${{ secrets.CF_ACCESS_CLIENT_ID }} --secret ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+            ProxyCommand cloudflared access ssh --hostname %h --service-token-id ${{ secrets.CF_ACCESS_CLIENT_ID }} --service-token-secret ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
             StrictHostKeyChecking accept-new
           EOF
           chmod 600 ~/.ssh/config
