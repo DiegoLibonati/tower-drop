@@ -50,14 +50,14 @@ describe("TowerDropPage", () => {
     it("should render the game title", () => {
       renderPage();
       expect(
-        screen.getByRole("heading", { name: "Tower Drop", level: 2 })
+        screen.getByRole("heading", { name: "Tower Drop", level: 1 })
       ).toBeInTheDocument();
     });
 
     it("should render the last score heading with initial value", () => {
       renderPage();
       expect(
-        screen.getByRole("heading", { name: /Last Score: 0/i, level: 3 })
+        screen.getByRole("heading", { name: /Last Score: 0/i, level: 2 })
       ).toBeInTheDocument();
     });
 

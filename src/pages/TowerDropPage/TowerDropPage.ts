@@ -18,8 +18,8 @@ const TowerDropPage = (): Page => {
 
         <div class="tower-drop__menu">
             <div class="tower-drop__menu-wrapper">
-                <h2 class="tower-drop__title">Tower Drop</h2>
-                <h3 class="tower-drop__last-score">Last Score: 0</h3>
+                <h1 class="tower-drop__title">Tower Drop</h1>
+                <h2 class="tower-drop__last-score">Last Score: 0</h2>
             </div>
         </div>
     </div>
