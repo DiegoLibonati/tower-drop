@@ -7,7 +7,8 @@ const onInit = (): void => {
   if (!app) throw new Error(`You must render a container to mount the app.`);
 
   const towerDropPage = TowerDropPage();
-  app.appendChild(towerDropPage);
+
+  app.replaceChildren(towerDropPage);
 };
 
 document.addEventListener("DOMContentLoaded", onInit);

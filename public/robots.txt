@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-site.com/sitemap.xml
+Sitemap: https://tower-drop.libonatis.com.ar/sitemap.xml

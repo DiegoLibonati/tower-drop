@@ -3,33 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0099ff" />
 
-    <title>Tower Drop</title>
+    <title>Tower Drop – Free 3D Block-Stacking Game</title>
 
     <meta
       name="description"
-      content="Tower Drop is a browser-based 3D block-stacking game inspired by the classic mobile game Stack."
+      content="Play Tower Drop free in your browser: a 3D block-stacking game. Time each click to stack blocks, watch overhangs fall with real physics, and beat your score."
     />
-    <meta name="keywords" content="Tower Drop, TowerDrop, tower-drop" />
     <meta name="author" content="Diego Libonati" />
 
-    <meta property="og:title" content="Tower Drop" />
+    <link rel="canonical" href="https://tower-drop.libonatis.com.ar/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tower Drop" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="Tower Drop – Free 3D Block-Stacking Game"
+    />
     <meta
       property="og:description"
-      content="Tower Drop is a browser-based 3D block-stacking game inspired by the classic mobile game Stack."
+      content="Play Tower Drop free in your browser: a 3D block-stacking game. Stack blocks with perfect timing and beat your score."
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://your-site.com" />
-    <meta property="og:image" content="/icon-192.png" />
+    <meta property="og:url" content="https://tower-drop.libonatis.com.ar/" />
+    <meta
+      property="og:image"
+      content="https://tower-drop.libonatis.com.ar/og-image.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Tower Drop – 3D block-stacking game"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tower Drop" />
+    <meta name="twitter:site" content="@DieLibonati" />
+    <meta name="twitter:creator" content="@DieLibonati" />
+    <meta
+      name="twitter:title"
+      content="Tower Drop – Free 3D Block-Stacking Game"
+    />
     <meta
       name="twitter:description"
-      content="Tower Drop is a browser-based 3D block-stacking game inspired by the classic mobile game Stack."
+      content="Play Tower Drop free in your browser: a 3D block-stacking game. Stack blocks with perfect timing and beat your score."
     />
-    <meta name="twitter:image" content="/icon-192.png" />
-    <meta name="twitter:creator" content="@your-user" />
+    <meta
+      name="twitter:image"
+      content="https://tower-drop.libonatis.com.ar/og-image.png"
+    />
 
     <link rel="apple-touch-icon" href="/icon-192.png" />
     <link rel="manifest" href="/manifest.json" />
@@ -40,9 +63,61 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
     />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Tower Drop",
+        "url": "https://tower-drop.libonatis.com.ar/",
+        "description": "Tower Drop is a free browser-based 3D block-stacking game. Time each click to stack blocks; overhanging pieces break off and fall with realistic physics.",
+        "image": "https://tower-drop.libonatis.com.ar/icon-512.png",
+        "inLanguage": "en",
+        "genre": ["Arcade", "Puzzle", "Casual"],
+        "gamePlatform": "Web Browser",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Web Browser",
+        "author": {
+          "@type": "Person",
+          "name": "Diego Libonati",
+          "url": "https://www.diegolibonati.com.ar/"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Tower Drop",
+        "url": "https://tower-drop.libonatis.com.ar/",
+        "inLanguage": "en"
+      }
+    </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <h1>Tower Drop – Free 3D Block-Stacking Game</h1>
+        <p>
+          Tower Drop is a free, browser-based 3D block-stacking game inspired by
+          the classic mobile game Stack. Click at the right moment to drop each
+          moving block onto the tower — only the overlapping portion stays, and
+          the overhang tumbles away with realistic physics. Stack as high as you
+          can and beat your high score.
+        </p>
+        <p>
+          Tower Drop requires JavaScript to play. Please enable JavaScript in
+          your browser.
+        </p>
+      </noscript>
+    </div>
     <script type="module" src="./src/index.ts" defer></script>
   </body>
 </html>

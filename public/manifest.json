@@ -2,10 +2,12 @@
   "name": "Tower Drop",
   "short_name": "Tower Drop",
   "description": "Tower Drop is a browser-based 3D block-stacking game inspired by the classic mobile game Stack.",
+  "lang": "en",
+  "categories": ["games", "entertainment"],
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "theme_color": "#0099ff",
   "icons": [
     {
       "src": "/icon-192.png",
